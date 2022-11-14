@@ -13,6 +13,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 export default function ProductList() {
   const dispatch = useDispatch()
   const product = useSelector((state)=>state.product.products)
+  console.log(product)
 
   useEffect(()=>{
     getProducts(dispatch)

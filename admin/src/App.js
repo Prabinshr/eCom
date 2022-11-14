@@ -12,13 +12,13 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
 import Order from "./pages/order/Order";
 import { useSelector } from "react-redux";
+import OrderProduct from "./pages/orderProductList/OrderProduct";
 
 function App() {
   // const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
   // const currentUser = user && JSON.parse(user).currentUser;
   // const admin = currentUser?.isAdmin;
   const admin = useSelector((state) => state.user.currentUser?.isAdmin);
-  const History = useHistory()
   return (
     <Router>
       <Switch>
@@ -50,6 +50,9 @@ function App() {
         </Route>
         <Route path="/orders">
         {admin ?  <Order /> : <Login/> }
+        </Route>
+        <Route path="/orderProduct/:userId">
+        {admin ?  <OrderProduct /> : <Login/> }
         </Route>
         {/* </>
         )} */}
