@@ -19,7 +19,7 @@ export default function OrderProduct() {
   {order.map((item)=>{
     {item.products.map((color)=>{
         console.log(color)
-    })}
+    })}  
   })}
 
   useEffect(() => {
