@@ -22,5 +22,5 @@ export const orderSlice = createSlice({
     },
   }
 })
-export const {getOrderStart,getOrderSuccess,getOrderFailure} = orderSlice.actions
+export const {getOrderStart,getOrderSuccess} = orderSlice.actions
 export default orderSlice.reducer
