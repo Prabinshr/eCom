@@ -19,6 +19,7 @@ export default function NewProduct() {
   const [size, setSize] = useState([]);
   const [color, setColor] = useState([]);
   const dispatch = useDispatch();
+ 
 
   const handleChange = (e) => {
     setInputs((prev) => {
