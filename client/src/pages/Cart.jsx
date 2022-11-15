@@ -178,11 +178,12 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.currentUser);
 
+
   const [stripeToken, setStripeToken] = useState(null);
   const dispatch = useDispatch();
   const history = useNavigate();
 
-  const [userId, setUserId] = useState(cart._id);
+  const [userId, setUserId] = useState(user._id);
   const [products, setProducts] = useState(cart.products);
   const [amount, setAmount] = useState(cart.total);
   const [address, setAddress] = useState("abc");
@@ -281,7 +282,7 @@ const Cart = () => {
             {cart.products.map((product) => (
               <Product>
                 <ProductDetails>
-                  <Image src="https://i.ibb.co/Bf6Ky4q/pngwing-com-8.png"></Image>
+                  <Image src={product.img}></Image>
                   <Details>
                     <ProductName>
                       <b>Product:</b>
@@ -291,7 +292,7 @@ const Cart = () => {
                       <b>ID:</b>
                       {product._id}
                     </ProductId>
-                    <ProductColor color="#2B3940">{product.color}</ProductColor>
+                    <ProductColor color={product.color}></ProductColor>
                     <ProductSize>
                       <b>Size:</b>
                       {product.size}

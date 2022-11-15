@@ -14,7 +14,6 @@ export default function Order() {
   const [data, setData] = useState(userRows);
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order.orders);
-  console.log(order);
 
   useEffect(() => {
     getOrders(dispatch);

@@ -1,74 +1,40 @@
 import "./orderProduct.css";
-import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
-import { productRows } from "../../dummyData";
-import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { deleteProduct, getOrders, getProducts } from "../../redux/apiCall";
+import { useEffect, useState } from "react";
+import { getOrders } from "../../redux/apiCall";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { userReq } from "../../requestMethod";
+import { Link, useLocation } from "react-router-dom";
+import { DataGrid } from "@material-ui/data-grid";
+import { DeleteOutline } from "@material-ui/icons";
 
 export default function OrderProduct() {
-    const dispatch = useDispatch();
-  const order = useSelector((state) => state.order.orders);
-//   console.log(order);
+  // const dispatch = useDispatch();
+  // const order = useSelector((state) => state.order.orders);
+  // //   console.log(order);
 
-  {order.map((item)=>{
-    {item.products.map((color)=>{
-        console.log(color)
-    })}  
-  })}
+  // useEffect(() => {
+  //   getOrders(dispatch);
+  // }, [dispatch]);
+
+  //   const handleDelete = (id) => {
+  //     deleteProduct(id, dispatch);
+  //   };
+
+  const [products, setProducts] = useState([]);
+  const location = useLocation();
+  const userId = location.pathname.split("/")[2];
 
   useEffect(() => {
-    getOrders(dispatch);
-  }, [dispatch]);
-
-//   const handleDelete = (id) => {
-//     deleteProduct(id, dispatch);
-//   };
-
-  const columns = [
-    { field: "_id", headerName: "ID", width: 220 },
-    {
-      field: "product",
-      headerName: "Product",
-      width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="productListItem">
-            <img className="productListImg" src={params.row.img} alt="" />
-            {params.row.title}
-          </div>
-        );
-      },
-    },
-    { field: "inStock", headerName: "Stock", width: 200 },
-    {
-      field: "price",
-      headerName: "Price",
-      width: 160,
-    },
-    {
-      field: "action",
-      headerName: "Action",
-      width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <button className="productListEdit">Order Complete</button>
-
-            {/* <DeleteOutline
-              className="productListDelete"
-              onClick={() => handleDelete(params.row._id)}
-            /> */}
-          </>
-        );
-      },
-    },
-  ];
+    const getProducts = async () => {
+      try {
+        const res = await userReq.get("/order/find/" + userId);
+        setProducts(res.data);
+      } catch {}
+    };
+    getProducts();
+  }, [userId]);
 
   return (
     <div className="productList">
@@ -76,14 +42,44 @@ export default function OrderProduct() {
       <div className="container">
         <Sidebar />
         <div className="body">
-          <DataGrid
-            rows={order}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={8}
-            checkboxSelection
-          />
+          <div className="productTable">
+            <table border={1}>
+              <tr>
+                <th>Product Id</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Color</th>
+                <th>Size</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+
+              </tr>
+              {products.map((item) =>
+                item.products.map((product) =>
+                  // console.log(product)
+                  <tr>
+                    <td>{product.productId}</td>
+                    <td>{product.title}</td>
+                    <td>
+                      <img src={product.img} alt="" />  
+                    </td>
+                    <td>{product.categories}</td>
+                    <td>{product.color}</td>
+                    <td>{product.size}</td>
+                    <td>{product.price}</td>
+                    <td>{product.quantity}</td>
+                    <td>{(product.price)*(product.quantity)}</td>
+                    <td>
+                      <button>Complete Order</button>  
+                    </td>
+                  </tr>
+                )
+              )}
+            </table>
+          </div>
         </div>
       </div>
     </div>

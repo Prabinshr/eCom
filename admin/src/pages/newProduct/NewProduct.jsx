@@ -76,7 +76,7 @@ export default function NewProduct() {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log("File available at", downloadURL);
           const product = { ...inputs, img: downloadURL, categories: cat , size: size ,color: color  };
-          addProduct(product, dispatch);
+          addProduct(product, dispatch) ;
         });
       }
     );

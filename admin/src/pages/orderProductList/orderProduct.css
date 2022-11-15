@@ -48,4 +48,24 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    position: relative;
 }
+.productTable{
+    display: flex;
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+ table{
+   border-collapse: collapse;
+   width: 100%;
+}
+th{
+    height: 50px;
+}
+.productTable img{
+   width: 150px;
+   height: 100px;
+   object-fit: contain;
+}
+
