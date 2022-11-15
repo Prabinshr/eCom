@@ -56,17 +56,17 @@
     position: absolute;
     top: 0;
 }
- table{
+.productTable table{
     border-style: ridge;
    border-collapse: collapse;
    width: 98%;
    border: 1px solid gray;
 
 }
-th{
+.productTable th{
     height: 50px;
 }
-tr{
+.productTable tr{
     border: none;
 }
 .productTable img{
