@@ -10,9 +10,9 @@ import ProductList from "./pages/productList/ProductList";
 import Product from "./pages/product/Product";
 import NewProduct from "./pages/newProduct/NewProduct";
 import Login from "./pages/login/Login";
-import Order from "./pages/order/Order";
 import { useSelector } from "react-redux";
 import OrderProduct from "./pages/orderProductList/OrderProduct";
+import Orders from "./pages/order/Orders";
 
 function App() {
   // const user = JSON.parse(localStorage.getItem("persist:root"))?.user;
@@ -25,8 +25,6 @@ function App() {
         <Route path="/login">
         {admin ?  <Home /> : <Login/> }
         </Route>
-        {/* {admin && (
-          <> */}
         <Route exact path="/">
         {admin ?  <Home /> : <Login/> }
         </Route>
@@ -49,13 +47,12 @@ function App() {
         {admin ?  <NewProduct /> : <Login/> }
         </Route>
         <Route path="/orders">
-        {admin ?  <Order /> : <Login/> }
+        {admin ?  <Orders /> : <Login/> }
         </Route>
         <Route path="/orderProduct/:userId">
         {admin ?  <OrderProduct /> : <Login/> }
         </Route>
-        {/* </>
-        )} */}
+       
       </Switch>
     </Router>
   );

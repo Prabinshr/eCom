@@ -57,15 +57,30 @@
     top: 0;
 }
  table{
+    border-style: ridge;
    border-collapse: collapse;
-   width: 100%;
+   width: 98%;
+   border: 1px solid gray;
+
 }
 th{
     height: 50px;
+}
+tr{
+    border: none;
 }
 .productTable img{
    width: 150px;
    height: 100px;
    object-fit: contain;
+}
+.productTable button{
+   background-color: teal;
+   border: none;
+   padding: 10px;
+   color: white;
+   cursor: pointer;
+   font-size: 15px;
+   border-radius: 10px;
 }
 

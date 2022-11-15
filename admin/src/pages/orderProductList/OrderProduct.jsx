@@ -10,17 +10,6 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 
 export default function OrderProduct() {
-  // const dispatch = useDispatch();
-  // const order = useSelector((state) => state.order.orders);
-  // //   console.log(order);
-
-  // useEffect(() => {
-  //   getOrders(dispatch);
-  // }, [dispatch]);
-
-  //   const handleDelete = (id) => {
-  //     deleteProduct(id, dispatch);
-  //   };
 
   const [products, setProducts] = useState([]);
   const location = useLocation();
@@ -45,7 +34,6 @@ export default function OrderProduct() {
           <div className="productTable">
             <table border={1}>
               <tr>
-                <th>Product Id</th>
                 <th>Title</th>
                 <th>Image</th>
                 <th>Category</th>
@@ -61,12 +49,13 @@ export default function OrderProduct() {
                 item.products.map((product) =>
                   // console.log(product)
                   <tr>
-                    <td>{product.productId}</td>
                     <td>{product.title}</td>
                     <td>
                       <img src={product.img} alt="" />  
                     </td>
-                    <td>{product.categories}</td>
+                    <td>{product.categories.map((cat)=>(
+                      <span>{cat},</span>
+                    ))}</td>
                     <td>{product.color}</td>
                     <td>{product.size}</td>
                     <td>{product.price}</td>
