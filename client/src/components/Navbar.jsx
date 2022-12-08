@@ -97,6 +97,13 @@ const Navbar = () => {
     e.preventDefault();
     logout(dispatch);
   };
+  const handleCart = () => {
+    if(!user){
+      window.location.replace("/login")
+    } else{
+      window.location.replace("/cart")
+    }
+  };
   return (
     <Container>
       <Wrapper>
@@ -135,7 +142,7 @@ const Navbar = () => {
             </>
           )}
           <Link to="/cart">
-            <MenuItem>
+            <MenuItem onClick={handleCart}>
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartIcon />
               </Badge>

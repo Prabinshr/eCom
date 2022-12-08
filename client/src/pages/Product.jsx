@@ -10,7 +10,7 @@ import { useLocation } from "react-router";
 import { useState } from "react";
 import { useEffect } from "react";
 import { publicReq } from "../requestMethod";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../redux/cartRedux";
 
 const Container = styled.div``;
@@ -118,6 +118,7 @@ const Product = () => {
   const location = useLocation()
   const id = location.pathname.split("/")[2]
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.user.currentUser);
 
   const [product,setProduct] = useState({})
   const [quantity,setQuantity] = useState(1)
@@ -144,7 +145,11 @@ const Product = () => {
     }
   }
   const handleClick = ()=>{
-    dispatch(addProduct({...product,quantity,color,size}))
+    if(!user){
+      window.location.replace("/login")
+    } else{
+      dispatch(addProduct({ ...product, quantity, color, size }));
+    }
   }
 
   return (

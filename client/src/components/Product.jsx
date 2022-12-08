@@ -4,7 +4,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { publicReq } from "../requestMethod";
 import { addProduct } from "../redux/cartRedux";
@@ -83,6 +83,7 @@ const Product = ({ item }) => {
   const [color,setColor] = useState("black")
   const [size,setSize] = useState("L")
   const dispatch = useDispatch()
+   const user = useSelector((state) => state.user.currentUser);
 
   useEffect(()=>{
     const getProduct = async ()=>{
@@ -95,9 +96,11 @@ const Product = ({ item }) => {
   },[item._id])
   
   const handleClick = ()=>{
-    dispatch(
-      addProduct({...product,quantity,color,size})
-    )
+    if(!user){
+      window.location.replace("/login")
+    } else{
+      dispatch(addProduct({ ...product, quantity, color, size }));
+    }
   }
   return (
     <Container>
